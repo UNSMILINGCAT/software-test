@@ -1,0 +1,72 @@
+LAMP=Linux、Apache、MySQL、PHP 
+系统：Linux
+web服务器/中间件/容器：apache
+数据库：mysql
+开发语音：php
+
+服务端---客户端
+
+-----系统可以连网
+
+1.关闭防火墙
+	service iptables stop
+	chkconfig iptables off
+
+	关闭selinux策略
+	setenforce 0 ----临时
+		修改/etc/selinux/config 文件   ----永久
+		将SELINUX=enforcing改为SELINUX=disabled
+	
+2.安装mysql数据库
+	yum install mysql-server、
+	rpm -qa | grep mysql
+		mysql-server-5.1.73-8.el6_8.x86_64
+		mysql-5.1.73-8.el6_8.x86_64
+		mysql-libs-5.1.73-8.el6_8.x86_64
+	2)启动mysql服务
+	service mysqld start  或者  /etc/init.d/mysqld start
+	chkconfig mysqld on
+	
+	3)确定mysql是否启动
+	 ps aux | grep mysqld
+	 root      27042  0.0  0.1 106096  1356 pts/1    S    04:37   0:00 /bin/sh /usr/bin/mysqld_safe --datadir=/var/lib/mysql --socket=/var/lib/mysql/mysql.sock --pid-file=/var/run/mysqld/mysqld.pid --basedir=/usr --user=mysql
+	 mysql     27144  0.0  2.1 377472 21864 pts/1    Sl   04:37   0:00 /usr/libexec/mysqld --basedir=/usr --datadir=/var/lib/mysql --user=mysql --log-error=/var/log/mysqld.log --pid-file=/var/run/mysqld/mysqld.pid --socket=/var/lib/mysql/mysql.sock
+	 
+3.安装httpd
+	1）yum -y install httpd  ---安装httpd
+	2）rpm -qa | grep httpd  ---查看httpd相关软件包
+		httpd-tools-2.2.15-69.el6.centos.x86_64
+		httpd-2.2.15-69.el6.centos.x86_64
+
+	3）service httpd start  ----启动httpd
+		chkconfig httpd on
+	4）ps aux | grep httpd  ----查看httpd是否启动
+		[root@localhost ~]# ps aux | grep httpd
+		root      27269  0.1  0.3 175748  3768 ?        Ss   04:56   0:00 /usr/sbin/httpd
+		apache    27271  0.0  0.2 175748  2456 ?        S    04:56   0:00 /usr/sbin/httpd
+		apache    27272  0.0  0.2 175748  2480 ?        S    04:56   0:00 /usr/sbin/httpd
+		apache    27273  0.0  0.2 175748  2456 ?        S    04:56   0:00 /usr/sbin/httpd
+		apache    27274  0.0  0.2 175748  2456 ?        S    04:56   0:00 /usr/sbin/httpd
+		apache    27275  0.0  0.2 175748  2456 ?        S    04:56   0:00 /usr/sbin/httpd
+		apache    27276  0.0  0.2 175748  2456 ?        S    04:56   0:00 /usr/sbin/httpd
+		apache    27277  0.0  0.2 175748  2456 ?        S    04:56   0:00 /usr/sbin/httpd
+		apache    27278  0.0  0.2 175748  2456 ?        S    04:56   0:00 /usr/sbin/httpd
+	5）win启动浏览器访问  http://你的LinuxIP地址 ，例如：http://192.168.2.80/
+
+4.安装PHP及其扩展
+		yum install php   ----安装PHP
+		yum install php-mbstring   ---安装PHP扩展
+		yum install php-mysql php-gd php-imap php-ldap php-odbc php-pear php-xml php-xmlrpc  ---和mysql扩展的 
+		
+		安装完成PHP后需要重启httpd
+		service httpd restart
+		
+		
+5.发布
+	1）ecshop.zip 里面的appserver 、 ecshop 两个目录cp 到 /var/www/html
+	2）appserver 、 ecshop 给 777权限
+	3）浏览器中 http://你的LinuxIP地址/ecshop
+	
+	
+
+	

@@ -1,0 +1,240 @@
+﻿最基本的linux命令：
+pwd  显示当前目录
+ls   显示当前目录下可见的所有文件和文件夹
+ls -l 以列表的形式显示当前目录下可见的所有文件和文件夹
+ls -a 显示当前目录下可见和隐藏的所有文件和文件夹
+
+cd   切换目录
+cd .. 回到上级目录
+cd    回到根目录/
+
+ifconfig  查看当前的ip地址
+
+文件系统相关命令
+mkdir  创建一个文件夹
+mkdir -p aa/bb/cc  创建多层文件夹
+rmdir  删除一个文件夹
+mv     移动一个文件夹或文件
+find   查找文件或目录
+
+touch  创建一个新的文件（空的）
+echo   将内容写入文件，如果文件不存在则创建之后再写入
+rm     删除文件
+常用：rm -rf 强制删除文件夹以及内部包含的文件
+cp    复制文件或文件夹
+	复制文件夹的时候需要加上-r参数
+
+查看文件内容
+cat  从第一行开始显示内容直到文件的末尾
+more  一页一页显示内容
+	空格键向下翻页
+	b键向上翻页
+	q键  退出
+less   一页一页显示内容
+	空格键向下翻页
+	b键向上翻页
+	q键  退出
+	?查找字符串  
+head  显示文件前面几行内容
+	head -n  显示的行数  文件
+tail  作用一：显示文件最后几行的内容
+	tail -n 显示的行数  文件
+	  作用二：增量显示文件内容 (工作中常用作查看动态日志)
+	语法： tail -f 文件名
+	例如：tail -f /usr/tomcat/logs/catalina.out
+
+vi/vim 文件编辑命令
+    文件的三种状态：命令模式、末行模式、编辑模式
+	三种状态转化：   【--必须掌握】
+		命令模式->末行模式：  shift + ":"
+		末行模式->命令模式:   esc
+		
+		命令模式->编辑模式：  a  i  o
+		编辑模式->命令模式:   esc
+		编辑模式->末行模式：先到命令模式
+vi/vim 只是打开文件，处于命令模式
+
+末行模式的时候的相关命令：    【--必须掌握】
+	:set nu  显示行号 
+	:set nonu  隐藏行号
+	:w  保存
+	:q  退出
+	:wq  保存并退出
+	:q!  强制退出不保存
+	
+命令模式相关的命令：
+	yy 复制一行      【--必须掌握】
+	p  粘贴           【--必须掌握】
+	nyy 复制n行
+	^   光标回到当前行的最前
+	$   光标回到当前行的末尾
+	G   回到最后一行     【--必须掌握】
+	gg  回到第一行      【--必须掌握】
+	dd  删除一行       【--必须掌握】
+	ndd 删除n行
+	u   撤销            【--必须掌握】
+	x   删除单个字母，多次按就多次删除（先往后删，再往前删
+	/str   查找对于字符串str
+	
+|管道符一般会结合grep使用    【--必须掌握】
+grep 就是对数据进行过滤
+|管道符前面的命令会将结果传给管道符后面的命令使用
+
+rpm （了解） 
+   安装软件  rpm -ivh 软件包名
+   卸载软件  rpm -e 软件包名 
+   查看已经安装的软件  rpm -qa【|grep mysql】  【--必须掌握】 
+   查看软件安装的目录  rpm -ql【|grep mysql】
+
+yum  在线安装软件，必须可以连接外网            【--必须掌握】
+	安装软件  yum install 软件包名  会将依赖的软件包一起安装
+	卸载软件  yum remove  软件包名  会将依赖的软件包一起卸载
+	yum list  仓库中所有的软件包列表
+
+用户管理：
+useradd 用户名  ----创建用户
+userdel 用户名  ----删除用户，但是不会删除home目录下对于用户的文件夹
+passwd  用户名  ---设置用户密码
+
+who 查看当前连接该linux的用户信息   ---了解
+
+cat /etc/passwd  查看所有用户信息
+
+su 用户名  切换用户 
+建议使用 su - 用户名 可以直接切换到对应用户的家目录
+
+用户组管理：
+groupadd 组名  ---f-创建组 
+groupdel 组名  ----删除组
+
+gpasswd -a 用户名 组名  --将用户添加到对应的组
+gpasswd -d 用户名 组名  --将用户从组中移除
+
+more /etc/group  ---查看所有用户组的信息
+
+groups 用户名  ---查看用户所属的组
+
+类型  宿主权限(u)    宿组权限(g)   其他人权限(o)         宿主(创建者)    宿组(创建者所在的组)       文件大小(字节)        最后修改时间              名称
+-        rw-          r--          r--          . 1        root             root   						103               7月  10 10:42 			111.txt
+-        rw-          ---          ---          . 1        root             root  						1612              7月   9 22:18 			anaconda-ks.cfg
+d        rwx          r-x          r-x          . 2        root             root  						4096              7月   9 15:19 			公共的
+
+
+类型：
+-  表示普通文件
+d  表示文件夹
+
+权限：
+r ----read 读  ---cat,more,less
+w ----write 写 ---vi/vim
+x ----执行----脚本，程序，命令	
+
+设置权限：
+方式1：使用数字  一定是三位数字  分别表示宿主权限，宿组权限，其他人权限
+rwx
+421
+	chmod 777 文件名
+方式2：使用u,g,o
+	chmod u+x,g-x,o+r  文件名
+	chmod ugo=rwx 文件名
+	
+设置文件对应的宿主:
+ chown 用户名  文件名 
+
+设置文件对应的宿组：
+ chgrp 组名 文件名
+ 
+注意：
+  如果设置文件夹对应的宿主或宿组，可以加上-R参数
+  -R参数表示文件夹中所有的文件或者文件夹的宿主或宿组都会改变
+chgrp -R 组名 文件名
+
+
+	
+.rar的文件linux不能压缩和解压缩
+压缩和解压缩  后缀：.zip
+zip -r 路径+压缩包名 文件1 文件2  文件夹   ----压缩文件
+unzip 压缩包名 -d 解压路径                 ----解压文件
+
+
+tar命令   后缀：.tar
+tar -cvf  压缩包名  文件1 文件2 文件夹    ---压缩文件
+tar -xvf  压缩包名                        ---解压文件 
+tar -tf   压缩包                    ---查看压缩包内容
+tar -rf  压缩包  文件列表  ---往压缩包追加文件
+tar --delete -f 压缩包 需要删除的文件  ---删除压缩包中的文件
+
+ 
+后缀：.tar.gz
+第1种方法：使用gzip(压缩)/gunzip(解压缩) 
+	压缩：gzip sum.tar
+	解压缩：gunzip  sum.tar.gz
+第2种方法：tar 调用 gzip
+	压缩：tar czvf  sum.tar.gz   sum.tar
+	解压缩：tar zxvf sum.tar.gz   sum.tar
+
+查看CPU、内存、IO信息
+	more /proc/cpuinfo
+	more /proc/meminfo
+	more /proc/ioports
+
+巡检服务器(开机信息)
+  dmesg    或   dmesg > dmesg.txt
+  >(重定向): 如果没有这个文件,则创建,如果有,就覆盖
+		将内容写入文件中
+  >>:在文件最后进行追加
+
+查看历史命令
+history 	查看所有历史命令
+history 10     查看最近10条命令
+
+free -m 查看内存使用情况
+
+查看硬盘：df -h    ->     du -sh *   配合着一起使用
+查看磁盘空间大小：df –h
+查看文件或文件夹所占空间大小：du -sh /tmp
+
+ifconfig  查询当前linux的IP地址
+
+
+防火墙：
+service iptables start  开启防火墙（临时）
+service iptables stop   关闭防火墙（临时）
+service iptables restart 重启防火墙
+
+service iptables reload 重新加载防火墙
+
+service iptables status  防火墙状态
+
+永久关闭防火墙：需要重启机器才生效
+chkconfig iptables off 
+永久开启防火墙：需要重启机器才生效
+chkconfig iptables on
+
+防火墙级别状态:
+chkconfig iptables --list
+
+
+
+关于进程：
+top 实时查看进程（相当于windows的任务管理器）
+
+查看进程：
+ps -ef 或者 ps -aux 
+区别：ps -aux 会将cpu和内存信息一起显示，ps -ef不行
+一般会结合管道符使用：ps -ef|grep httpd
+
+杀死进程：
+kill 进程id（PID）
+可以加上 -9强制杀死进程
+
+killall 进程名
+
+查看端口是否被占用：
+netstat -anp | grep 80
+下面的结果表示有进程占用80端口：
+其中2978就是进程的ID，httpd就是进程的名称
+tcp  0   0 :::80   :::*  LISTEN  2978/httpd
+
+	
+

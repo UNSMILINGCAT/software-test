@@ -1,0 +1,14 @@
+Apache服务器默认端口为80
+
+如果apache服务器访问不了，可能存在的问题及解决方法：
+
+问题1：apache服务器是否已经启动
+解决：可以查看apache服务器是否已经启动
+      命令：service httpd status
+
+问题2：防火墙是否开启
+解决：关闭防火墙
+
+问题3：SELinux是否关闭
+	SELinux（Security-Enhanced Linux）安全的linux子系统
+解决：setenforce 0
