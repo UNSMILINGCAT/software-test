@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>千里云网页</title>
+	<meta charset="utf-8">
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+
+
+<body>
+ <h1  align="center"  >UI自动化各种控件处理</h1>
+<table border="1" align="center"   class="table" >
+<tr>
+  <td>
+   <p>这是处理各种弹窗</p>
+	<button type='button' class="btn btn-info" onclick="alert('你不是好人!')" id="alert">alert</button>
+	<button type='button' class="btn btn-info" onclick="prompt('你是好人吗?')" id="prompt">prompt</button>
+	<button type='button' class="btn btn-info" onclick="confirm('你确定要吃饭吗')" id="confirm">confirm</button>
+	<button type='button' class="btn btn-info" onclick="window.open('iframe_test.html')" id="opennew">打开新窗口</button>
+	   
+	   
+  </td>
+  <td>文本框处理：
+  <br/>
+   <label for="name">用户名 <input type="text" class="form-control" name="username" id="name"></label>
+   <label for="password">密&nbsp&nbsp&nbsp码 <input type="password"  class="form-control" name="password" id="password"></label><br />
+		
+  </td>
+</tr>
+<tr>
+  <td>单选按钮处理：
+ <p>	请选择你的性别: <br />
+		<input type="radio" name="sex" class="iradio_minimal" value='male' id="male"><label for="male">男</label>
+		<input type="radio" name="sex" value='female' id="female"><label for="female">女</label>
+		<input type="radio" name="sex" value='other' id="other"><label for="other">其他</label>
+	</p>
+  </td>
+  <td>
+  	<p>
+		请选择你的爱好: <br />
+		<input type="checkbox"  name="sport" id="sport"> <label  for="sport">运动</label>
+		<input type="checkbox" name="sleep" id="sleep" checked="checked" > <label for="sport">休息</label>
+		<input type="checkbox" name="food" id="food"> <label for="sport">美食</label>
+		<input type="checkbox" name="game" id="game"> <label for="sport">游戏</label>
+	</p>
+  
+  </td>
+  
+
+</tr>
+<tr>
+
+  <td>下拉框处理
+  	<p>
+		<select class="selectpicker" data-style="btn-primary" name='city'>
+			<option value="1">中国广州</option>
+			<option value="2">中国北京</option>
+			<option value="3" selected="selected">中国上海</option>
+			<option value="4">其他国家</option>
+		</select>
+		<select name='district'>
+			<option value="1">天河</option>
+			<option value="2">越秀</option>
+			<option value="3" selected="selected">海珠</option>
+			<option value="4">番禺</option>
+		</select>
+	</p>
+   <p>
+<input type="datetime-local" value="2015-09-24T13:59:59"/>
+   </p>
+  </td>
+  
+  <td>
+  	<p> 请写一段200字以内的自我介绍<br />
+		<textarea rows="5" cols="70" id="self_intr">
+			我是隔壁老王...
+		</textarea>
+	</p>
+  </td>
+</tr>
+
+<tr>
+<td  colspan=2>
+
+<iframe src="http://172.16.3.158/discuz/" width="800px" height="300px" id="test" name="testname"></iframe>
+
+ </td>
+
+</tr>
+
+</table>
+
+	<p> 测试滚动条而写的<br />
+		<textarea rows="50" cols="20" id="self_intr">
+			就为了测试滚动条...
+		</textarea>
+	</p>
+    <input   type="text"  id="test1"  name="test1"><br><br><br>
+	<input   type="text"  id="test2"  name="test2">
+	</p>
+	
+</body>
+</html>

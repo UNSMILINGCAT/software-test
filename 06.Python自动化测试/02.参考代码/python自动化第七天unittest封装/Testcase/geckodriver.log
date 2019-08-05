@@ -1,0 +1,25 @@
+1511488562879	geckodriver	INFO	geckodriver 0.19.1 (0000000000000000000000000000000000000000 2017-10-31)
+1511488562885	geckodriver	INFO	Listening on 127.0.0.1:8201
+1511488564941	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-profile" "C:\\Users\\Dongbo\\AppData\\Local\\Temp\\rust_mozprofile.tePEtT9rRoDl"
+1511488565456	Marionette	INFO	Enabled via --marionette
+[Child 34948, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 34948, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+1511488567329	Marionette	INFO	Listening on port 8207
+1511488568051	Marionette	WARN	TLS certificate errors will be ignored for this session
+1511488568112	Marionette	DEBUG	Register listener.js for window 4294967297
+1511488568130	Marionette	DEBUG	Received DOM event "beforeunload" for "about:blank"
+1511488568534	Marionette	DEBUG	Received DOM event "pagehide" for "about:blank"
+1511488568534	Marionette	DEBUG	Received DOM event "unload" for "about:blank"
+1511488568812	Marionette	DEBUG	Received DOM event "DOMContentLoaded" for "http://s.cjol.com/l2008/?KeywordType=0&Keyword=%u0075%u0069&RecruitmentType=1&SearchType=1003"
+1511488569447	Marionette	DEBUG	Received DOM event "pageshow" for "http://s.cjol.com/l2008/?KeywordType=0&Keyword=%u0075%u0069&RecruitmentType=1&SearchType=1003"
+[Parent 38348, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 28852, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 28852, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[GPU 32720, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+g
+
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+

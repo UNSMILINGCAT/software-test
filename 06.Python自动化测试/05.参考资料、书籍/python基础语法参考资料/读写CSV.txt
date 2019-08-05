@@ -1,0 +1,24 @@
+import csv
+
+
+csv_reader=csv.reader(open("D:/2007.csv","r"))
+for row in csv_reader:
+    print row
+
+# list = ['1', '2','3','4']#写入数据是一个list， 里面数据为字符串类型
+# out = open("D:/2007.csv", 'ab')#这种方式会覆盖之前的内容。
+# out = open("D:/2007.csv", 'wb')#这种方式会覆盖之前的内容。
+# csv_writer = csv.writer(out,dialect='excel')
+# csv_writer.writerow(list)
+
+# #csv 写入
+# stu1 = ['marry',26]
+# stu2 = ['bob',23]
+# #打开文件，追加a
+# out = open("D:/2007.csv",'ab')
+# #设定写入模式
+# csv_write = csv.writer(out,dialect='excel')
+# #写入具体内容
+# csv_write.writerow(stu1)
+# csv_write.writerow(stu2)
+# print ("write over")

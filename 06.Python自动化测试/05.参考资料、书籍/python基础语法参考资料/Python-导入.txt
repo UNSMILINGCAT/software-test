@@ -1,0 +1,20 @@
+1.导入整个模块
+import scr.test001
+form scr import test001
+2.导入某个函数
+from scr.test001 import xxxx
+3.导入部分名称太长用as
+4.作为模块和脚本的区别：
+if __name__ == "__main__":
+
+
+somefile = open(r'somefileName')
+    try:
+        for line in somefile:
+            print line
+            # ...more code
+    finally:
+        somefile.close()
+
+
+让你写的脚本模块既可以导入到别的模块中用，另外该模块自己也可执行;如果这个文件是作为模块被其他文件调用，不会执行这里面的代码。 只有执行这个文件时， if 里面的语句才会被执行。 这个功能经常可以用于进行测试
