@@ -1,0 +1,125 @@
+综合练习
+一、存在以下四个数据库表
+学生表：student(sid,sname)    Sid学号,sname学生姓名
+教师表：teacher(tid,tname)    tid教师编号，tname教师名字
+课程表：course(cid,cname,tid)     cid课程编号,cname课程姓名,tid教师编号
+成绩表：sc(sid,cid,score)	sid学号，cid选修课程编号，score 成绩
+
+
+
+
+student的数据如下：
+1 张三
+2 李四
+3 王五
+4 马六
+5 陈七
+
+create table student (
+sid int,
+sname char(4));
+
+insert into student values("1","张三");
+insert into student values("2","李四");
+insert into student values("3","王五");
+insert into student values("4","马六");
+insert into student values("5","陈七");
+
+
+teacher的数据如下：
+1 包包
+2 老向
+3 老张
+4 春哥
+
+create table teacher (
+tid int,
+tname char(4)
+);
+
+insert into teacher values("1","包包");
+insert into teacher values("2","老向");
+insert into teacher values("3","老张");
+insert into teacher values("4","春哥");
+
+
+
+course的数据如下：
+1 语文 1
+2 数学 2
+3 英语 3
+4 日语 4
+
+create table course(
+cid int,
+cname char(4),
+tid int);
+
+insert into course values("1","语文","1");
+insert into course values("2","数学","2");
+insert into course values("3","英语","3");
+insert into course values("4","日语","4");
+
+sc的数据如下：
+1   1    30
+1   2    60
+1   3    70
+2   1    60
+2   2    70
+3   2    30
+3   3    80
+4   1    70
+4   2    60
+4   3    80
+4   4    90
+5   1    90
+5   4    90
+
+create table sc(
+sid int,
+cid int,
+score int);
+
+insert into sc values(1,1,30);
+insert into sc values(1,2,60);
+insert into sc values(1,3,70);
+insert into sc values(2,1,60);
+insert into sc values(2,2,70);
+insert into sc values(3,2,30);
+insert into sc values(3,3,80);
+insert into sc values(4,1,70);
+insert into sc values(4,2,60);
+insert into sc values(4,3,80);
+insert into sc values(4,4,90);
+insert into sc values(5,1,90);
+insert into sc values(5,4,90);
+
+
+
+
+1、查询所有同学的学号sid、姓名saname(student)、选课数cid(sc)、总成绩sum(score) sc
+
+
+2、查询平均成绩大于60分的同学的学号(sid)和平均成绩(avg(score))
+
+ 
+3、查询选修的课程cid不少于3门的学生的编号sid，学生姓名saname
+
+
+4、查询选修了'数学'并且及格的姓名saname，课程名cname（course），成绩score（sc）。
+
+  
+5、查询每个学生至少选修了2门count（cid）看起来像'语'(like '%语%') course的课程的学生姓名saname。
+   
+ 
+6、查询不及格score<60的课程超过2门count（*）>2的学生编号和姓名
+
+
+7、查询选择的课程中"语文"的成绩比"数学"的成绩高的学生编号和姓名。
+
+
+8、查询没有选择看起来像“老”的老师的课程的学生编号sid 和姓名saname。
+
+9、查询选修了课程的学员人数。
+
+

@@ -1,0 +1,203 @@
+﻿1、 查询Student表中的所有记录的Sname、Ssex和Class列。
+
+	SELECT sname,ssex,class FROM student;
+
+2、 查询教师所有的单位即不重复的Depart列。
+
+	SELECT DISTINCT depart FROM teacher;
+	或者
+	SELECT  depart FROM teacher GROUP BY depart;
+
+3、 查询Student表的所有记录。
+
+	SELECT * FROM student;
+
+4、 查询Score表中成绩在60到80之间的所有记录。
+
+	SELECT * FROM score WHERE degree BETWEEN 60 AND 80;
+
+5、 查询Score表中成绩为85，86或88的记录。
+
+	SELECT * FROM score WHERE degree IN(85,86,88);
+
+6、 查询Student表中“95031”班或性别为“女”的同学记录。
+
+	SELECT * FROM student WHERE class='95031' OR ssex='女';
+
+7、 以Class降序查询Student表的所有记录。
+
+	SELECT * FROM student ORDER BY class DESC;
+
+8、 以Cno升序、Degree降序查询Score表的所有记录。
+
+	SELECT * FROM score ORDER BY cno,degree DESC;
+
+9、 查询“95031”班的学生人数。
+
+	SELECT class,COUNT(*) FROM student WHERE class='95031';
+
+10、查询Score表中的最高分的学生学号和课程号。（子查询或者排序）
+
+	排序：按照degree列降序排列，用limit子句取第一条记录
+	SELECT sno,cno  FROM score ORDER BY degree DESC LIMIT 1;
+	子查询：通过一个子查询找出score表中degree列的最大值，然后作为一个条件与degree进行比较
+	SELECT sno,cno FROM score 
+	WHERE degree=(SELECT MAX(degree)FROM score);
+	
+11、查询每门课的平均成绩。
+
+	单表：分组+聚合函数
+	SELECT cno,AVG(degree) FROM score GROUP BY cno;
+	多表显示课程名称：连接+分组+聚合函数。score表与course表有共同的列cno,可通过cno作为关键子连接，然后分组+聚合函数，使用共同的列必须指定表名。
+	SELECT course.cno,cname,AVG(degree) FROM course
+	JOIN score ON course.cno=score.cno
+	GROUP BY course.cno;
+	
+12、查询Score表中至少有5名学生选修的并以3开头的课程的平均分数。
+	1.通过where+like去除多余的记录
+	2.cno进行分组+having+聚合函数
+	
+	SELECT cno,AVG(degree) FROM score 
+	WHERE cno LIKE "3%"
+	GROUP BY cno
+	HAVING COUNT(*)>5;
+
+13、查询分数大于70，小于90的Sno列。
+	
+	不能用between and,因为between and是闭区间
+	SELECT sno FROM score WHERE degree>70 AND degree<90;
+
+14、查询所有学生的Sname、Cno和Degree列。
+
+	两表连接，sname在student表，cno和degree在score表
+	连接关键字：两个表都有的一个列sno
+	SELECT sname,cno,degree FROM student
+	JOIN score
+	ON score.sno=student.sno;
+
+15、查询所有学生的Sno、Cname和Degree列。
+
+	思路与14题一样，两表连接
+	SELECT sno,cname,degree FROM score
+	JOIN course
+	ON score.cno=course.cno;
+
+16、查询所有学生的Sname、Cname和Degree列。
+
+	多表连接：
+	SELECT sname,cname,degree FROM student
+	JOIN score
+	ON student.sno=score.sno
+	JOIN course
+	ON score.cno=course.cno;
+
+17、查询“95031”班学生的平均分。
+
+	连接+where+聚合函数
+	SELECT AVG(score.degree) FROM score 
+	JOIN student
+	ON score.sno=student.sno
+	WHERE class="95031";
+	
+	子查询？可以做吗？
+
+
+19、查询选修“3-105”课程的成绩高于“109”号同学成绩的所有同学的记录。
+
+	SELECT * FROM score 
+	WHERE Cno='3-105' AND degree>(SELECT MAX(degree ) FROM Score WHERE Sno='109' AND Cno='3-105' );
+
+21、查询成绩高于学号为“109”、课程号为“3-105”的成绩的所有记录。
+
+	SELECT * FROM score WHERE degree>ALL(SELECT degree FROM score WHERE sno='109' AND cno='3-105');
+
+22、查询和学号为108、101的同学同年出生的所有学生的Sno、Sname和Sbirthday列。
+
+	SELECT sno,sname,sbirthday FROM student 
+	WHERE YEAR(sbirthday) IN (SELECT YEAR(sbirthday) FROM student WHERE sno IN('108','101'));
+
+23、查询“张旭“教师任课的学生成绩。
+	1.通过子查询teacher表中找出“张旭”的tno
+	2.把子查询当条件
+	SELECT cname FROM  course WHERE tno IN (SELECT tno FROM teacher WHERE tname='张旭');
+
+24、查询选修某课程的同学人数多于5人的教师姓名。
+	SELECT tname FROM teacher
+	JOIN course
+	ON course.tno=teacher.tno
+	WHERE cno IN (SELECT COUNT(cno) FROM score GROUP BY cno HAVING COUNT(cno)>5);
+
+25、查询95033班和95031班全体学生的记录。
+
+26、查询存在有85分以上成绩的课程Cno。
+
+
+
+27、查询出“计算机系“教师所教课程的成绩表。
+
+28、查询“计算机系”与“电子工程系“不同职称的教师的Tname和Prof。
+
+29、查询选修编号为“3-105“课程且成绩至少高于选修编号为“3-245”的同学的Cno、Sno和Degree,并按Degree从高到低次序排序。
+
+30、查询选修编号为“3-105”且成绩高于选修编号为“3-245”课程的同学的Cno、Sno和Degree。
+
+31、查询所有教师和同学的name、sex和birthday。
+
+32、查询所有“女”教师和“女”同学的name、sex和birthday。	
+
+33、查询成绩比该课程平均成绩低的同学的成绩表。
+
+34、查询所有任课教师的Tname和Depart.
+
+36、查询至少有2名男生的班号。
+
+37、查询Student表中不姓“王”的同学记录。
+
+	SELECT * FROM student WHERE NOT sname LIKE "王";
+
+38、查询Student表中每个学生的姓名和年龄。
+
+	SELECT sname,YEAR(NOW())-YEAR(sbirthday) age FROM student;
+
+39、查询Student表中最大和最小的Sbirthday日期值。
+	聚合函数
+	SELECT MAX(sbirthday),MIN(sbirthday) FROM student;
+
+40、以班号和年龄从大到小的顺序查询Student表中的全部记录。
+	注意：年龄的值越小，年龄越大
+	SELECT * FROM student ORDER BY class DESC ,sbirthday;
+
+41、查询“男”教师及其所上的课程。
+	要用到的表:teacher(老师表)，课程表（course），然后两表连接
+	SELECT cname FROM course
+	JOIN teacher ON course.tno=teacher.tno
+	WHERE teacher.tsex='男';
+
+42、查询最高分同学的Sno、Cno和Degree列。
+	子查询：
+	SELECT sno,cno,degree FROM score
+	WHERE degree=(SELECT MAX(degree) FROM score);
+
+43、查询和“李军”同性别的所有同学的Sname。
+	SELECT sname FROM student 
+	WHERE ssex=(SELECT ssex FROM student WHERE sname='李军') AND sname!='李军';
+
+44、查询和“李军”同性别并同班的同学Sname。
+	SELECT sname FROM student 
+	WHERE class=(SELECT class FROM student WHERE sname='李军') AND
+	ssex=(SELECT ssex FROM student WHERE sname='李军') AND sname!='李军';
+
+45、查询所有选修“计算机导论”课程的“男”同学的成绩表。
+	
+	连接：
+	SELECT student.sno , score.cno ,degree FROM student 
+	JOIN score
+	ON student.sno=score.sno
+	JOIN course
+	ON course.cno=score.cno
+	WHERE student.ssex="男" AND course.cname="计算机导论";
+	
+	子查询：
+	SELECT  Sno,Cno,degree FROM score 
+	WHERE Cno=( SELECT Cno FROM course WHERE Cname='计算机导论') AND Sno 
+	IN (SELECT Sno FROM student WHERE Ssex='男');
