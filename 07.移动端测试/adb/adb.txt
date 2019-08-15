@@ -1,0 +1,9 @@
+# Android adb
+
+1、adb devices
+	查看当前连接计算机的设备,包括真机Android设备和Android模拟器
+	
+2、连接夜神
+	adb  connect 127.0.0.1:62001
+
+3、	

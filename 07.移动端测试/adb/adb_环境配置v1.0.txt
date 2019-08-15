@@ -1,0 +1,8 @@
+﻿### Android adb 环境配置 ###
+					
+1、Android SDK的安装
+
+	下载安装Android SDK：
+	新建变量名 ANDROID_HOME ：D:\360Se\android-sdk-windows（SDK的路径）
+	Path      加入 SDK的 tools 和  platform-tools 的路径
+			D:\360Se\android-sdk-windows\tools 和 	 D:\360Se\android-sdk-windows\platform-tools					

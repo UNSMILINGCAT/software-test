@@ -1,0 +1,213 @@
+﻿Android AVD
+
+1.定义：Android   Virtual   Device，Android虚拟设备
+2.如何配置？
+	创建模拟机
+	android   create   avd   -n   testavd   -t   1
+
+	AVD(模拟器)所在位置
+		Linux(~/.android/avd)
+		Windows(C:\Documents   and   Settings\Administrator\.android\avd)
+		ini文件保存了模拟机的信息
+	查询模拟器
+		android   list   avd
+	运行模拟机
+		emulator   -avd   testavd
+	连接(默认为5554)
+		adb   connect   127.0.0.1
+	删除模拟机（先关机）
+		android   delete   avd   -n   testavd
+3.报错和解决办法
+	Error:   Argument   'adk_2.2_avd'   is   not   recognized.
+	--参数报错，不要-name   -target   要-n   -t或者--name   --target，且中间不要有空格
+	Error:   Target   id   is   not   valid.   Use   'android.bat   list   targets'   to   get   the   target   ids.
+	--参数不对，android.bat   list   targets   可以知道⽬前的ID值
+	补充：
+		Name：你给他的名字，随便写，只要以后能找到就⾏。不过最好有个标识，⽐如android4.0之类的名字。
+		Device：让你选择⼀个机型，下拉后进⾏选择，⼀般现在都是4.0英⼨屏幕以上的⼿机，随便选⼀个就好。   Targ
+et：是选择API的版本，⽐如你可以选择2.3或者4.0么得，只要你的机⼦⾥有相应的SDK（如果没有去菜单栏windows
+	-android   SDK   Manager那⾥下载）
+
+ADB的定义
+	Android   Debug   Bridge   安卓调试桥   安卓调试⼯具   PC端和Android端的桥梁
+作⽤：
+	eclipse   通过调⽤adb命令来调试Android程序
+	测试通过ADB来管理设备和模拟器，⽐如安装卸载软件，更新升级，上传下载软件
+	adb监听的默认端⼝为模拟器5554和真机5037
+
+ADB环境搭建（环境搭建尽量⽤英⽂路径）
+1.JDK环境配置
+
+2.sdk环境配置
+	配置adb所在环境变量：
+	ANDROID_HOME=D:\tool\java\adt-bundle-windows-x86-20130917\sdk
+
+			PATH中增加路径：
+			D:\tool\java\adt-bundle-windows-x86-20130917\sdk\tools
+			D:\tool\java\adt-bundle-windows-x86-20130917\sdk\platform-tools
+
+		如何检查是否配置好：
+		adb   version   版本信息
+
+			tips：
+			D:\tool\java\adt-bundle-windows-x86-20130917\sdk\tools
+			中的⼯具有sqlite   uiautomatorviewer   monkeyrunner   monitor   等⼯具
+
+3.⼿机开启USB调试模式或者模拟机器
+				如何开启USB调试模式？
+
+		tips：模拟器连接的命令
+			adb   connect   127.0.0.1   默认连接端⼝   5555
+			夜神模拟器         adb   connect   127.0.0.1:62001
+			逍遥模拟器         adb   connect   127.0.0.1:21503
+			如果没有安卓⼿机可以通过设置代理的⽅式远程其他⼈的⼿机？adb   connect   192.168.2.240:5554
+
+
+
+ADB命令详解
+1.查看ADB的版本信息
+	adb   version
+
+2.搜索模拟器/设备的实例
+	adb   devices
+
+3.执⾏Android机器上的linux   shell命令
+	adb   shell   [command]
+
+3.将指定的⽂件从模拟器或者设备拷贝到计算机上
+
+	adb   pull   <remote>   <local>
+	adb   pull   /storage/sdcard0/test   d:temp
+
+	tips：
+		linux   shell下不能⽤此命令
+		adb   shell进去的根⽬录只读不写
+
+4.将指定的⽂件从计算机上拷贝到模拟器/设备中
+	adb   push   <local>   <remote>
+			tips：
+						注意pull   和   push   远程和本地⽂件的顺序
+
+3.安装文件
+			adb   install   ⽂件路径
+			adb   install   D:\temp\MOMOmomo_1210.apk
+
+			tips：
+					可以直接拖到⽂件到cmd⾥，cmd⾃动识别路径
+					安装后复制安装路径，可以卸载      /data/local/tmp/MOMOmomo_1210.apk
+
+4.卸载文件
+			1.卸载命令，要⽤安装以后的package
+					adb   uninstall   [-k]   <package>
+
+		adb   unistall   MOMOmomo_1210.apk
+		adb   unistall   -k   MOMOmomo_1210.apk
+					k表⽰是否保留应⽤的配置信息和cache数据
+
+		卸载failure？cd   /data/data   找到你安装以后的名字com.immomo.momo
+
+			2.直接删除
+
+					卸载和读写没有权限，怎么解决？
+
+5.获取设备的ID和序列号
+			adb   get-serialno
+
+6.查看bug报告
+				adb   bugreport
+
+7.查看⽇志数据,可结合|grep过滤匹配⾃⼰想查看的⽇志内容
+				adb   logcat   -s
+
+8.发布端⼝
+				adb   forward   tcp:5555   tcp:8880
+
+9.通过远程Shell端运⾏AQLite3连接数据库
+
+10.启动DDMS
+				ddms
+
+
+
+ADB命令练习
+				ADB连接的两种⽅式:
+
+1.adb shell删除系统apk
+http://blog.csdn.net/he315889714/article/details/38519101
+
+2.adb端⼝被占⽤了，如何解决？
+
+3.Android如何查看已连接的WIFI密码，⼏种办法？
+
+			解决⽅案⼀（有电脑推荐，⽅便快捷）
+			adb   shell   连接⼿机获取root权限，如果返回的字符串中不包含root字样，再输⼊su命令回车
+			继续输⼊cat   /data/misc/wifi/*.conf命令，将会把⽂件打印出来
+			ssid表⽰WIFI名称，psk是WIFI密码
+
+			解决⽅案⼆（⽆电脑使⽤）
+			⼿机安装类似RE⽂件管理器的软件
+			打开RE⽂件管理器，挂载为可读写模式，如果⽆权限，请授予该软件root权限
+			进⼊到/data/misc/wifi/⽬录，打开对应的.conf⽂件，如果打不开则复制到/sdcard/⽬录下打开
+
+
+
+		ADB连接的两种⽅式:
+
+	adb⽀持两种连接Android系统的⽅式，USB⽅式及⽹络⽅式
+	⼀般android⼿机及android平板默认会设置为USB⽅式(直接插数据线的⽅式)
+	android系统底层运⾏着⼀个服务（adbd），也就是在⼿机系统内部，⽤于相应和管理⼤家在电脑端的adb命令连接，
+	这个服务在启动时会根据⼿机的配置监听USB连接或⽹络其中之⼀
+
+adb   connect   192.168.1.100  wifi模式
+adb   shell         usb模式
+
+ADB配置常见报错和解决办法
+*   报错1   adb   devicesadb   server   is   out   of   date
+
+	1.   错误信息：
+		C:\Users\lizy>adb   devices
+adb   devicesadb   server   is   out   of   date.  killing...
+ADB   server   didn't   ACK*   failed   to   start   daemon   *error:   unknown   host   servic
+
+	2.   原因：adb   nodaemon   server
+				cannot   bind   'tcp:5037'
+				adb的端⼝（5037）被占⽤了
+
+	3.解决办法
+			adb   nodaemon   server
+			netstat   -ano   |   findstr   "5037"
+			tasklist   |   findstr   "8516"
+			taskkill   /f   /pid   963
+
+	3.   重启adb-server
+				adb   kill-server
+				adb   start-server
+				adb   devices
+	*   daemon   started   successfully   *
+
+*   报错2   List   of   devices   attached
+			D:\adb>adb   shell
+					error:   device   not   found
+
+	1.检查Android设备驱动是否安装   --设备管理器   -便携式设备
+	2.开启开发者模式   -USB调试   -其他设备   -检查是否有未安装的驱动   -   安装驱动
+			tips   可以⽤⼿机助⼿安装驱动,但是⽤完以后要退出进程,否则会占⽤5037端⼝
+	3.⼿机是否⽀持USB3.0还是2.0？
+
+*   报错3   D:\adb\adbgjb>adb   connect   192.168.31.45
+						unable   to   connect   to   192.168.31.45:5555
+	可能模拟器端⼝不是这个
+
+*   报错4   offline或是no   permissions
+	当adb⽆法连接Android   AVD虚拟设备时，若设备连接状态为offline或是no   permissions，
+	则可尝试使⽤root⽤户执⾏adb   kill-server来重启设备连接
+
+
+
+
+
+
+
+
+
+	

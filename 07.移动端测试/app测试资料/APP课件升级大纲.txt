@@ -1,0 +1,32 @@
+
+# APP 课件升级 大纲
+
+1、adb 环境配置 文档
+	adb 课件升级
+	adb shell 脚本(ddms)
+
+2、monkey 环境配置 文档
+	monkey 课件升级
+	monkeyrunner （游戏需要，资武做）
+
+3、appium 环境配置 文档
+	appium 课件升级
+
+4、fiddler 环境配置 文档（windows）
+	fiddler 课件升级   （资武要求：过滤器，断点，数据包的基本分析）
+	
+	charles（苹果）
+	
+5、APP 专项测试
+		流量（Wireshark），耗电量（耗电量标准：行业标准&公司标准），性能（CPU（占比趋势图分析）,内存（占比趋势分析），安全）
+		弱网（WiFi，2G,3G,4G）【资武要求加强】
+		
+6、appscan：待定
+
+7、反编译（AAPT）：待定（资武要求），建议放在游戏
+
+8、云平台（分析报告导出）
+		涵盖：百度云，wetest，云测，网易的那个东东（着重wetest，网易云测）
+		
+9.GT
+		

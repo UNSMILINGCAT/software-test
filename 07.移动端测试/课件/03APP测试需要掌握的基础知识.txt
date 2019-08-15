@@ -1,0 +1,58 @@
+windows基础操作
+1.  任务管理器
+	有遇见过任务管理器中进程PID未勾选的同学。
+	请进入查看>选择列，勾选PID：
+	为何要勾选PID？Android最常见的，就是5037端口被占用，adb起不来。
+	所以遇见这种情况，首先就是去结束掉占用该端口的进程，
+	这里就需要先确定占用该端口的进程。
+	netstat -ano | findstr 5037 | findstr LISTENING
+	找到进程的pid，然后去任务管理器当中查找对应的pid，
+	杀掉该进程，当然，这里可以用dos命令tasklist、taskkill。
+2.  cmd命令窗⼝的设置
+	cmd应该是最最常用的工具，打印logcat，appium的log信息、查看文件内容等等，
+	但cmd默认的窗口太小，缓存也太小，所以经常在打印logcat、显示其它信息的时候
+	会冲掉很大部分内容，这里就需要设置下窗口大小及缓存
+	请将屏幕缓冲区大小设大点，窗口大小也可以设大些，这样在显示信息的时候就不至于信息经常被冲掉。
+3.  dos命令
+	dos命令还是有部分需要多熟悉，比如cd、dir、mkdir、del、remdir、copy、move等等，
+	有时候简单的任务，可以用这些命令组合成bat脚本，方便我们工作，另外可以安装一个cygwin，
+	可以在windows下很方便地使用一些linux的命令。
+
+Android相关
+1.  adb 命令
+	常用的adb命令是必须要去掌握的。这里不列举，可自行查看adb帮助信息，最好每个命令都去实践下。
+2.  log的抓取
+3.  logcat日志类型（main log、events log、radio log）
+	遇见crash时需要的log
+	应用anr时需要的trace日志
+	bugreport、dmesg以及tombstone日志等等
+4.  日志过滤技巧
+	根据时间点、报错信息将日志进行过滤下
+
+5.  Android的基础知识
+	四大组件、Activity的生命周期
+6.  linux
+	linux的一些常用命令得熟悉（top、ps等命令）,简单的shell脚本要会写
+7.  工具
+	Android自带的monkey、monkeyrunner工具
+	SDK里面的那些工具也要会用，知道是用来做什么的，比如tools目录下的hierarchyviewer、
+	uiautomatorviewer、monitor、traceview，build-tools目录下的aapt。
+8.  语言
+	java、python语言可以花点精力去学习下，这两个语言应该是测试用的最多的，
+	不会有坏处，想做自动化这块，没有语言基础肯定是做不好的。
+9.  测试框架
+	robotium、appium、uiautomator、instrumentation
+
+测试技能
+1.  APP的功能测试
+2.  APP的兼容性测试
+3.  APP的专项测试
+4.  电量测试
+5.  流量测试
+6.  弱网测试
+7.  稳定性测试
+8.  性能测试
+9.  接口测试
+10. 自动化测试
+11. 安全性测试
+
